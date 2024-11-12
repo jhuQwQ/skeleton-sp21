@@ -5,7 +5,7 @@ import java.util.Observable;
 
 
 /** The state of a game of 2048.
- *  @author TODO: YOUR NAME HERE
+ *  @author TODO: Jianing Hu
  */
 public class Model extends Observable {
     /** Current contents of the board. */
@@ -138,6 +138,11 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (b.tile(i, j) == null) return true;
+            }
+        }
         return false;
     }
 
@@ -148,6 +153,12 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+        for (int i = 0; i < 4; i ++) {
+            for (int j = 0; j < 4; j++) { // (0,0) (0,1) (0,2) (0,3)
+                if (b.tile(i, j) == null) continue;
+                if (b.tile(i, j).value() == MAX_PIECE) return true;
+            }
+        }
         return false;
     }
 
@@ -159,6 +170,32 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+//        for (int i = 0; i < 4; i++) {
+//            for (int j = 0; j < 4; j++) {
+//                if (b.tile(i, j) == null) return true;
+//                // four corners 0,0 0,3 3,0 3,3
+//                if (b.tile(0 , 0).value() == b.tile(0,1).value() || b.tile(0, 0).value() == b.tile(1,0).value()) return true;
+//                else if (b.tile(0 , 3).value() == b.tile(0,2).value() || b.tile(0, 3).value() == b.tile(1,3).value()) return true;
+//                else if (b.tile(3 , 0).value() == b.tile(2,0).value() || b.tile(3, 0).value() == b.tile(3,1).value()) return true;
+//                else if (b.tile(3 , 3).value() == b.tile(3,2).value() || b.tile(3, 3).value() == b.tile(2,3).value()) return true;
+//                //
+//                else if ((i == 0 && j != 0 && j != 3) || (j == 3 && i != 0 && i != 3)) {
+//                    if (b.tile(0, j).value() == b.tile(1, j).value()) return true;
+//                }
+//                else if (j == 0 && i != 0 && i != 3) {
+//                    if (b.tile(i, 0).value() == b.tile(i, 1).value()) return true;
+//                }
+//                else if (i == 3 && j != 0 && j != 3) {
+//                    if (b.tile(3, j).value() == b.tile(2, j).value()) return true;
+//                }
+//                else if (j == 3 && i != 0 && i != 3) {
+//                    if (b.tile(i, 3).value() == b.tile(i, 2).value()) return true;
+//                } else {
+//                    if (b.tile(i, j).value() == b.tile(i + 1, j).value() || b.tile(i, j).value() == b.tile(i - 1, j).value() || b.tile(i, j).value() == b.tile(i, j + 1).value() || b.tile(i, j).value() == b.tile(i, j - 1).value()) return true;
+//                }
+//            }
+//        }
+        
         return false;
     }
 
