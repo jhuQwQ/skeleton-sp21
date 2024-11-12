@@ -170,32 +170,48 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
-//        for (int i = 0; i < 4; i++) {
-//            for (int j = 0; j < 4; j++) {
-//                if (b.tile(i, j) == null) return true;
-//                // four corners 0,0 0,3 3,0 3,3
-//                if (b.tile(0 , 0).value() == b.tile(0,1).value() || b.tile(0, 0).value() == b.tile(1,0).value()) return true;
-//                else if (b.tile(0 , 3).value() == b.tile(0,2).value() || b.tile(0, 3).value() == b.tile(1,3).value()) return true;
-//                else if (b.tile(3 , 0).value() == b.tile(2,0).value() || b.tile(3, 0).value() == b.tile(3,1).value()) return true;
-//                else if (b.tile(3 , 3).value() == b.tile(3,2).value() || b.tile(3, 3).value() == b.tile(2,3).value()) return true;
-//                //
-//                else if ((i == 0 && j != 0 && j != 3) || (j == 3 && i != 0 && i != 3)) {
-//                    if (b.tile(0, j).value() == b.tile(1, j).value()) return true;
-//                }
-//                else if (j == 0 && i != 0 && i != 3) {
-//                    if (b.tile(i, 0).value() == b.tile(i, 1).value()) return true;
-//                }
-//                else if (i == 3 && j != 0 && j != 3) {
-//                    if (b.tile(3, j).value() == b.tile(2, j).value()) return true;
-//                }
-//                else if (j == 3 && i != 0 && i != 3) {
-//                    if (b.tile(i, 3).value() == b.tile(i, 2).value()) return true;
-//                } else {
+
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (b.tile(i, j) == null) return true;
+                // four corners 0,0 0,3 3,0 3,3
+                if (b.tile(0 , 0).value() == b.tile(0,1).value() || b.tile(0, 0).value() == b.tile(1,0).value()) return true;
+                else if (b.tile(0 , 3).value() == b.tile(0,2).value() || b.tile(0, 3).value() == b.tile(1,3).value()) return true;
+                else if (b.tile(3 , 0).value() == b.tile(2,0).value() || b.tile(3, 0).value() == b.tile(3,1).value()) return true;
+                else if (b.tile(3 , 3).value() == b.tile(3,2).value() || b.tile(3, 3).value() == b.tile(2,3).value()) return true;
+                //
+                else if ((i == 0 && j != 0 && j != 3)) { // row 0: col 1 and col 2
+                    if (b.tile(0, j).value() == b.tile(0, j - 1).value()) return true;
+                    if (b.tile(0, j).value() == b.tile(0, j + 1).value()) return true;
+                    if (b.tile(0, j).value() == b.tile(1, j).value()) return true;
+                }
+                else if (j == 0 && i != 0 && i != 3) { // col 0: row 1 and row 2
+                    if (b.tile(i, 0).value() == b.tile(i - 1, 0).value()) return true;
+                    if (b.tile(i, 0).value() == b.tile(i + 1, 0).value()) return true;
+                    if (b.tile(i, 0).value() == b.tile(i, 1).value()) return true;
+
+                }
+                else if (i == 3 && j != 0 && j != 3) { // row 3: col1 col2
+                    if (b.tile(3, j).value() == b.tile(2, j).value()) return true;
+                    if (b.tile(3, j).value() == b.tile(3, j - 1).value()) return true;
+                    if (b.tile(3, j).value() == b.tile(3, j + 1).value()) return true;
+
+                }
+                else if (j == 3 && i != 0 && i != 3) { // col3: row1 row2
+                    if (b.tile(i, 3).value() == b.tile(i, 2).value()) return true;
+                    if (b.tile(i, 3).value() == b.tile(i + 1, 3).value()) return true;
+                    if (b.tile(i, 3).value() == b.tile(i - 1, 3).value()) return true;
+
+
+                }
+                //
+//                else {
 //                    if (b.tile(i, j).value() == b.tile(i + 1, j).value() || b.tile(i, j).value() == b.tile(i - 1, j).value() || b.tile(i, j).value() == b.tile(i, j + 1).value() || b.tile(i, j).value() == b.tile(i, j - 1).value()) return true;
-//                }
-//            }
-//        }
-        
+                //}
+            }
+        }
+
         return false;
     }
 
