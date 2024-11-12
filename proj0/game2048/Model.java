@@ -117,6 +117,7 @@ public class Model extends Observable {
         //if (board.tile(3, 3) != null)   board.move(3, 3, t);
 //        Tile.create(2, 3, 3);
         changed = true;
+        int oldScore = score;
         for (int c = 3; c > -1; c--) {
             for (int r = 3; r > -1; r--) {
                 Tile t = board.tile(c, r);
@@ -126,7 +127,6 @@ public class Model extends Observable {
                         if (r == 2) {
                             if (board.tile(c, 3) == null) {
                                 board.move(c, 3, t);
-                                
                             }
                             else if (board.tile(c, 3) != null && board.tile(c, r).value() == board.tile(c, 3).value()) {
                                 board.move(c, 3, t);
@@ -134,28 +134,30 @@ public class Model extends Observable {
                             }
                         } else if (r == 1) {
                             if (board.tile(c, 2) == null) {
-                                if (board.tile(c, 3) == null) board.move(c, 3, t);
+                                if (board.tile(c, 3) == null) {
+                                    board.move(c, 3, t);
+                                }
                                 else {
-                                    if (board.tile(c, 1).value() == board.tile(c, 3).value()) { //r == r3
+                                    if (board.tile(c, 1).value() == board.tile(c, 3).value() && score == oldScore) { //r == r3
                                         board.move(c, 3, t);
                                         score += board.tile(c, 3).value();
                                     } else {
                                         board.move(c, 2, t);
                                     }
                                 }
-                            } else { // not null
+                            } else { // r2 is not null
                                 if (board.tile(c, r).value() == board.tile(c, r + 1).value()) {
                                     board.move(c, r + 1, t);
                                     score += board.tile(c, r + 1).value();
                                 }
                             }
-                        } else { //r == 0
+                        } else { // r == 0
                             if (board.tile(c, 1) == null) {
                                 if (board.tile(c, 2) == null) {
                                     if (board.tile(c, 3) == null) {
                                         board.move(c, 3, t);
                                     } else {
-                                        if (board.tile(c, r).value() == board.tile(c, 3).value()) {
+                                        if (board.tile(c, r).value() == board.tile(c, 3).value() && score == oldScore) {
                                             board.move(c, 3, t);
                                             score += board.tile(c, 3).value();
                                         } else { // r1: null, r2: null, r3 value not equal
@@ -163,15 +165,17 @@ public class Model extends Observable {
                                         }
                                     }
                                 }   else { // r1: null, r2: not null
-                                        if (board.tile(c, r).value() == board.tile(c, 2).value()) { // r3 = r2
+                                        if (board.tile(c, r).value() == board.tile(c, 2).value() && score == oldScore) { // r3 = r2
                                             board.move(c, 2, t);
                                             score += board.tile(c, 2).value();
-                                        } else  board.move(c, 1, t);
+                                        } else {
+                                            board.move(c, 1, t);
+                                        }
                                 }
                             } else { // r1 not null
                                 if (board.tile(c, r).value() == board.tile(c, 1).value()) {
                                     board.move(c, 1, t);
-                                    score += board.tile(c, 1).value() ;
+                                    score += board.tile(c, 1).value();
                                 }
                             }
                         }
