@@ -9,6 +9,11 @@ public class IntList {
         rest = r;
     }
 
+    public static void main(String[] args) {
+        IntList mySmallerList = IntList.of(1, 4, 9);
+        System.out.println(mySmallerList.toString());
+    }
+
     /** Return the size of the list using... recursion! */
     public int size() {
         if (rest == null) {
